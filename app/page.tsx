@@ -1,27 +1,20 @@
-'use client';
-
-import { useChat } from 'ai/react';
-
-export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
-
+import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+import Illustrator from "../components/Illustrator";
+export default async function Body() {
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      {messages.map(m => (
-        <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === 'user' ? 'User: ' : 'AI: '}
-          {m.content}
+    <div className="flex flex-col justify-center items-center h-screen w-full">
+      <div className="max-w-xl p-4 rounded-lg w-full">
+        <h1 className="text-3xl font-bold mb-4">Illustration AI</h1>
+        <p className="text-gray-600 mb-6">
+          Welcome to our AI application. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.
+        </p>
+        <div className="flex justify-center w-full">
+          <Illustrator />
         </div>
-      ))}
-
-      <form onSubmit={handleSubmit}>
-        <input
-          className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
-          value={input}
-          placeholder="Say something..."
-          onChange={handleInputChange}
-        />
-      </form>
+      </div>
     </div>
   );
 }
