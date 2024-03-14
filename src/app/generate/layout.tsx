@@ -12,5 +12,10 @@ export default function GenerateLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <h1>Hello</h1>
+    </>
+  );
 }

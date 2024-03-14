@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 
 import './globals.css';
 
+import { AppStoreProvider } from '@/providers/app-provider';
+
 const inter = Inter({ subsets: ['latin'] });
 
 const title = 'IllustratorAI - SVG Illustrations Generator';
@@ -51,7 +53,9 @@ export default function RootLayout({
               consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
               labore et dolore magna aliqua.
             </p>
-            <div className='flex justify-center w-full'>{children}</div>
+            <AppStoreProvider>
+              <div className='flex justify-center w-full'>{children}</div>
+            </AppStoreProvider>
           </div>
         </div>
       </body>
