@@ -30,7 +30,7 @@ import { Textarea } from '@/components/ui/textarea';
 
 import { PromptSuggestion } from './PromptSuggestion';
 
-const promptSuggestions = [
+export const promptSuggestions = [
   'A city view with clouds',
   'A beautiful glacier',
   'A forest overlooking a mountain',

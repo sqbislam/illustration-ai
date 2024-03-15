@@ -11,7 +11,7 @@ import { nanoid } from '@/lib/utils';
 /**
  * Validates a request object.
  *
- * @param {QrGenerateRequest} request - The request object to be validated.
+ * @param {IllustratorGenerateRequest} request - The request object to be validated.
  * @throws {Error} Error message if URL or prompt is missing.
  */
 

@@ -2143,9 +2143,9 @@
   integrity sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==
 
 "@types/node@*", "@types/node@>=12":
-  version "20.11.27"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.27.tgz#debe5cfc8a507dd60fe2a3b4875b1604f215c2ac"
-  integrity sha512-qyUZfMnCg1KEz57r7pzFtSGt49f6RPkPBis3Vo4PbS7roQEDn22hiHzl/Lo1q4i4hDEgBJmBF/NTNg2XR0HbFg==
+  version "20.11.28"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.28.tgz#4fd5b2daff2e580c12316e457473d68f15ee6f66"
+  integrity sha512-M/GPWVS2wLkSkNHVeLkrF2fD5Lx5UC4PxA0uZcKc6QqbIQUJyW1jVjueJYi1z8n0I5PxYrtpnPnWglE+y9A0KA==
   dependencies:
     undici-types "~5.26.4"
 
@@ -2189,9 +2189,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "18.2.65"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.65.tgz#54eb311fa9aba173c9e163d42ec188d5a42878b8"
-  integrity sha512-98TsY0aW4jqx/3RqsUXwMDZSWR1Z4CUlJNue8ueS2/wcxZOsz4xmW1X8ieaWVRHcmmQM3R8xVA4XWB3dJnWwDQ==
+  version "18.2.66"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.66.tgz#d2eafc8c4e70939c5432221adb23d32d76bfe451"
+  integrity sha512-OYTmMI4UigXeFMF/j4uv0lBBEbongSgptPrHBxqME44h9+yNov+oL6Z3ocJKo0WyXR84sQUNeyIp9MRfckvZpg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2785,9 +2785,9 @@ base64-js@^1.3.1:
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
 binary-extensions@^2.0.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
-  integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.3.0.tgz#f6e14a97858d327252200242d4ccfe522c445522"
+  integrity sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==
 
 boolbase@^1.0.0:
   version "1.0.0"
@@ -3492,9 +3492,9 @@ eastasianwidth@^0.2.0:
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
 
 electron-to-chromium@^1.4.668:
-  version "1.4.703"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.703.tgz#786ab0c8cfe548b9da03890f923e69b1ae522741"
-  integrity sha512-094ZZC4nHXPKl/OwPinSMtLN9+hoFkdfQGKnvXbY+3WEAYtVDpz9UhJIViiY6Zb8agvqxiaJzNG9M+pRZWvSZw==
+  version "1.4.707"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.707.tgz#77904f87432b8b50b8b8b654ba3940d2bef48d63"
+  integrity sha512-qRq74Mo7ChePOU6GHdfAJ0NREXU8vQTlVlfWz3wNygFay6xrd/fY2J7oGHwrhFeU30OVctGLdTh/FcnokTWpng==
 
 emittery@^0.8.1:
   version "0.8.1"
@@ -4119,9 +4119,9 @@ fraction.js@^4.3.7:
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
 
 framer-motion@^11.0.12:
-  version "11.0.12"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.0.12.tgz#fba4d239253f22036347de3285bcf07df082f4c6"
-  integrity sha512-1VW4pk+4EH8RwWHdqntWTwF9peranyHn/BczvMzF9TGh/FwMKxoRZzkig8Nak9BQA8GymfIyCGo5adXwRuXDXA==
+  version "11.0.13"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.0.13.tgz#2287f8bc5b9785c898989a44ed3a646a881e85b2"
+  integrity sha512-zDjUj7dBiB6WklCvklKH06mwbYO0hzWrq5Rdz/DgeBFsCVQRmb9Zv7I9dPM7lX5c8eMxxba5D6sEVIv1kj/Ttg==
   dependencies:
     tslib "^2.4.0"
 
@@ -6134,9 +6134,9 @@ postcss-nested@^6.0.1:
     postcss-selector-parser "^6.0.11"
 
 postcss-selector-parser@^6.0.11:
-  version "6.0.15"
-  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.15.tgz#11cc2b21eebc0b99ea374ffb9887174855a01535"
-  integrity sha512-rEYkQOMUCEMhsKbK66tbEU9QVIxbhN18YiniAwA7XQYTVBqrBy+P2p5JcdqsHgKM2zWylp8d7J6eszocfds5Sw==
+  version "6.0.16"
+  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.16.tgz#3b88b9f5c5abd989ef4e2fc9ec8eedd34b20fb04"
+  integrity sha512-A0RVJrX+IUkVZbW3ClroRWurercFhieevHB38sr2+l9eUClMqome3LmEmnhlNy+5Mr2EYN6B2Kaw9wYdd+VHiw==
   dependencies:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
@@ -6289,7 +6289,7 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
-react@18.2.0:
+react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
