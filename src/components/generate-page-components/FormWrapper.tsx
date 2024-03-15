@@ -14,14 +14,12 @@ import { Button } from '../ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import { Label } from '../ui/label';
 import { Slider } from '../ui/slider';
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 
@@ -61,7 +59,12 @@ export default function FormWrapper() {
   }, []);
 
   return (
-    <Accordion type='single' collapsible className='w-full' value={activeStep}>
+    <Accordion
+      type='single'
+      collapsible
+      className='w-full flex-shrink-0'
+      value={activeStep}
+    >
       <AccordionItem onClick={() => handleClick('item-1')} value='item-1'>
         <AccordionTrigger>Choose art style</AccordionTrigger>
         <AccordionContent>
