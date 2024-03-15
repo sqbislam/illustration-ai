@@ -11,6 +11,7 @@ import {
   IllustratorGenerateRequest,
   IllustratorGenerateResponse,
 } from '@/lib/service';
+import { cn } from '@/lib/utils';
 
 import { IllustrationCard } from '@/components/IllustrationCard';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -28,7 +29,6 @@ import LoadingDots from '@/components/ui/loadingdots';
 import { Textarea } from '@/components/ui/textarea';
 
 import { PromptSuggestion } from './PromptSuggestion';
-import { cn } from '@/lib/utils';
 
 const promptSuggestions = [
   'A city view with clouds',
