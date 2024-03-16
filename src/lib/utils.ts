@@ -10,3 +10,8 @@ export const nanoid = customAlphabet(
   '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
   7,
 );
+
+// Helper func to add a delay
+export function timeout(delay: number) {
+  return new Promise((res) => setTimeout(res, delay));
+}
