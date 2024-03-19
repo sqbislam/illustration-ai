@@ -14,15 +14,17 @@ export class ReplicateClient {
   }
 
   /**
-   * Generate a QR code.
+   * Generate an Illustration
    */
-  generateQrCode = async (request: IllustratorRequest): Promise<string> => {
+  generateIllustration = async (
+    request: IllustratorRequest,
+  ): Promise<string> => {
     const output = (await this.replicate.run(
       'lucataco/sdxl-lightning-4step:727e49a643e999d602a896c774a0658ffefea21465756a6ce24b7ea4165eba6a',
       {
         input: {
-          width: 512,
-          height: 512,
+          width: request.width,
+          height: request.height,
           prompt: request.prompt,
           qr_conditioning_scale: request.guidance_scale,
           num_inference_steps: 4,
@@ -33,7 +35,7 @@ export class ReplicateClient {
     )) as IllustratorResponse;
 
     if (!output) {
-      throw new Error('Failed to generate QR code');
+      throw new Error('Failed to generate Illustration');
     }
 
     return output[0];

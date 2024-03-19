@@ -14,7 +14,10 @@ export const PromptSuggestion: React.FC<PromptSuggestionProps> = ({
 }) => {
   return (
     <button
-      onClick={() => onClick()}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
       disabled={isLoading}
       className={`border p-2 rounded-2xl ${
         !isLoading ? 'cursor-pointer' : 'cursor-not-allowed'

@@ -1,9 +1,13 @@
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Head from 'next/head';
 
 import './globals.css';
 
+import ThemeToggler from '@/components/ThemeToggler';
+
 import { AppStoreProvider } from '@/providers/app-provider';
+import { ThemeProvider } from '@/providers/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -44,20 +48,32 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
+      <Head>
+        <title>Illustration AI</title>
+      </Head>
       <body className={inter.className}>
-        <div className='flex flex-col justify-center items-center h-screen w-full'>
-          <div className='max-w-xl p-4 rounded-lg w-full'>
-            <h1 className='text-3xl font-bold mb-4'>Illustration AI</h1>
-            <p className='text-grawy-600 mb-6'>
-              Welcome to our AI application. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua.
-            </p>
-            <AppStoreProvider>
-              <div className='flex justify-center w-full'>{children}</div>
-            </AppStoreProvider>
-          </div>
-        </div>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AppStoreProvider>
+            <div className='flex flex-col justify-center items-center w-full relative'>
+              <ThemeToggler />
+              <div className='max-w-xl p-4 rounded-lg w-full'>
+                <h1 className='text-3xl font-bold mb-4'>Illustration AI</h1>
+                <p className='text-grawy-600 mb-6'>
+                  Welcome to our AI application. Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua.
+                </p>
+
+                <div className='flex justify-center w-full'>{children}</div>
+              </div>
+            </div>
+          </AppStoreProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

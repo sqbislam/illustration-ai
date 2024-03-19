@@ -11,7 +11,7 @@ import { nanoid } from '@/lib/utils';
 /**
  * Validates a request object.
  *
- * @param {QrGenerateRequest} request - The request object to be validated.
+ * @param {IllustratorGenerateRequest} request - The request object to be validated.
  * @throws {Error} Error message if URL or prompt is missing.
  */
 
@@ -50,10 +50,10 @@ export async function POST(request: NextRequest) {
   const id = nanoid();
   const startTime = performance.now();
 
-  const imageUrl = await replicateClient.generateQrCode({
+  const imageUrl = await replicateClient.generateIllustration({
     height: 512,
     width: 512,
-    prompt: `(Flat UI)(Flat Colors)(Flat Icon)(Minimal) Vector graphic Illustration, Svg, Sharp, cartoon,${reqBody.prompt},`,
+    prompt: reqBody.prompt,
     num_inference_steps: reqBody.num_inference_steps,
     guidance_scale: reqBody.guidance_scale,
     negative_prompt:
