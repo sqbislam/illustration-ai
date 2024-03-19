@@ -4,6 +4,8 @@ import * as ImageTracer from 'imagetracerjs';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
+import { useAppStore } from '@/providers/app-provider';
+
 import PaletteSelector from './PaletteSelector';
 import { optionpresets, useOptions } from './useOptions';
 import { PromptSuggestion } from '../PromptSuggestion';
@@ -13,9 +15,9 @@ import { Skeleton } from '../ui/skeleton';
 import { Slider } from '../ui/slider';
 
 export default function ImageEditor() {
-  const exampleimage = '/assets/ex (3).png';
+  const imageUrl = useAppStore((state) => state.formData?.image_url);
   const { updateOptions, selectPreset, options, getScaleFactor } = useOptions({
-    sourceImage: exampleimage,
+    sourceImage: imageUrl ?? '',
   });
   const [svg, setSvg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +28,7 @@ export default function ImageEditor() {
       const scaleFactor = getScaleFactor();
 
       await ImageTracer.imageToSVG(
-        exampleimage,
+        imageUrl,
         async (svg: string) => {
           setSvg(svg);
           setIsLoading(false);
@@ -128,7 +130,7 @@ export default function ImageEditor() {
           Source Image
           <Image
             id='sourceImage'
-            src={exampleimage}
+            src={imageUrl ?? ''}
             alt='preview image'
             priority
             height={200}

@@ -1,6 +1,8 @@
 import * as ImageTracer from 'imagetracerjs';
+import { DownloadIcon, Edit } from 'lucide-react';
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
+import Link from 'next/link';
+import { useCallback, useEffect, useState } from 'react';
 
 import { optionpresets, useOptions } from '../edit-image-components/useOptions';
 import { Button } from '../ui/button';
@@ -18,6 +20,7 @@ export default function ImagePreview({
   });
 
   const [svg, setSvg] = useState('');
+
   const handleClick = useCallback(async () => {
     if (imageUrl) {
       const scaleFactor = getScaleFactor();
@@ -33,6 +36,22 @@ export default function ImagePreview({
       );
     }
   }, [getScaleFactor, imageUrl, options]);
+  const downloadSVG = () => {
+    const svg =
+      (document &&
+        document?.getElementById('svgcontainer') &&
+        document?.getElementById('svgcontainer')?.innerHTML) ??
+      '';
+    const blob = new Blob([svg.toString()]);
+    const element = document.createElement('a');
+    element.download = 'illustration-ai.svg';
+    element.href = window.URL.createObjectURL(blob);
+    element.click();
+    element.remove();
+  };
+  useEffect(() => {
+    handleClick();
+  }, [handleClick, imageUrl]);
   return (
     <div className='w-full flex-shrink-0 flex-col mx-5 lg: basis-[30%] h-120 flex items-center justify-center'>
       <Image
@@ -43,15 +62,36 @@ export default function ImagePreview({
         width={200}
       />
       {isLoading ? (
-        <Skeleton className='w-[200px] h-[200px]' />
+        <Skeleton className='w-[200px] h-[200px] mt-5' />
       ) : (
         <div
           id='svgcontainer'
-          className='w-[200px] h-[200px]'
+          className='w-[200px] h-[200px] mt-5'
           dangerouslySetInnerHTML={{ __html: svg }}
         ></div>
       )}
-      <Button onClick={handleClick}>Generate</Button>
+      <div className='flex flex-row gap-2 mt-2'>
+        <Button
+          variant='link'
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <Link href='/edit'>
+            <Edit />
+          </Link>
+        </Button>
+
+        <Button
+          variant='link'
+          onClick={(e) => {
+            e.preventDefault();
+            downloadSVG();
+          }}
+        >
+          <DownloadIcon />
+        </Button>
+      </div>
     </div>
   );
 }

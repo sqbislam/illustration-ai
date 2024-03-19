@@ -31,13 +31,7 @@ export default function GenerateForm({
 }) {
   const { handleSubmitButton, form, isLoading } = generateProps;
   const [activeStep, setActiveStep] = React.useState('item-1');
-  const {
-    register,
-    formState: { errors },
-    setValue,
-    getValues,
-    handleSubmit,
-  } = form;
+  const { register, setValue, getValues, handleSubmit } = form;
 
   const handleClick = (val: string) => {
     setActiveStep(val);

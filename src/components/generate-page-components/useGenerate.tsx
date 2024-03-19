@@ -7,6 +7,9 @@ import {
   IllustratorGenerateRequest,
   IllustratorGenerateResponse,
 } from '@/lib/service';
+import { nanoid } from '@/lib/utils';
+
+import { useAppStore } from '@/providers/app-provider';
 
 const generateFormSchema = z.object({
   prompt: z.string().min(3).max(160),
@@ -73,9 +76,6 @@ const generateprompt = ({ artType }: { artType: string }) => {
   return currPrompt;
 };
 export const useGenerate = ({
-  imageUrl,
-  prompt,
-  redirectUrl,
   modelLatency,
   id,
 }: {
@@ -91,6 +91,11 @@ export const useGenerate = ({
     null,
   );
 
+  const { setFormData, formData } = useAppStore((state) => ({
+    formData: state.formData,
+    setFormData: state.setFormData,
+  }));
+
   const form = useForm<GenerateFormValues>({
     resolver: zodResolver(generateFormSchema),
     mode: 'onChange',
@@ -100,16 +105,18 @@ export const useGenerate = ({
   });
 
   useEffect(() => {
-    if (imageUrl && prompt && modelLatency && id) {
+    if (response && response.image_url) {
       setResponse({
-        image_url: imageUrl,
-        model_latency_ms: modelLatency,
-        id: id,
+        image_url: response.image_url,
+        model_latency_ms: modelLatency ?? 0,
+        id: id ?? nanoid(),
       });
 
-      form.setValue('prompt', prompt);
+      // Save data to global store when new image url generated
+      setFormData(response as any);
     }
-  }, [imageUrl, modelLatency, prompt, redirectUrl, id, form]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
 
   const handleSuggestionClick = useCallback(
     (suggestion: string) => {
