@@ -1,17 +1,16 @@
 'use client';
 
 import * as ImageTracer from 'imagetracerjs';
-import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useAppStore } from '@/providers/app-provider';
 
 import PaletteSelector from './PaletteSelector';
 import { optionpresets, useOptions } from './useOptions';
+import ImagePreview from '../generate-page-components/ImagePreview';
 import { PromptSuggestion } from '../PromptSuggestion';
 import { FieldGroup } from '../ui/field-group';
 import { Label } from '../ui/label';
-import { Skeleton } from '../ui/skeleton';
 import { Slider } from '../ui/slider';
 
 export default function ImageEditor() {
@@ -124,32 +123,11 @@ export default function ImageEditor() {
         <PaletteSelector />
       </div>
       <div className='border-l border-gray-200' role='separator'></div>
-      <div className='w-full flex flex-col items-center gap-5'>
-        {/* Images */}
-        <div>
-          Source Image
-          <Image
-            id='sourceImage'
-            src={imageUrl ?? ''}
-            alt='preview image'
-            priority
-            height={200}
-            width={200}
-          />
-        </div>
-        <div>
-          Preview Image
-          {isLoading ? (
-            <Skeleton className='w-[200px] h-[200px]' />
-          ) : (
-            <div
-              id='svgcontainer'
-              className='w-[200px] h-[200px]'
-              dangerouslySetInnerHTML={{ __html: svg }}
-            ></div>
-          )}
-        </div>
-      </div>
+      <ImagePreview
+        imageUrl={imageUrl ?? ''}
+        isLoading={isLoading}
+        svgOut={svg}
+      />
     </div>
   );
 }

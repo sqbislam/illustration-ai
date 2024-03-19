@@ -11,15 +11,17 @@ import { Skeleton } from '../ui/skeleton';
 export default function ImagePreview({
   isLoading,
   imageUrl,
+  svgOut,
 }: {
   isLoading: boolean;
   imageUrl: string | null;
+  svgOut?: string | null;
 }) {
   const { options, getScaleFactor } = useOptions({
     sourceImage: imageUrl ?? '',
   });
 
-  const [svg, setSvg] = useState('');
+  const [svg, setSvg] = useState(svgOut ?? '');
 
   const handleClick = useCallback(async () => {
     if (imageUrl) {
@@ -50,8 +52,10 @@ export default function ImagePreview({
     element.remove();
   };
   useEffect(() => {
-    handleClick();
-  }, [handleClick, imageUrl]);
+    if (svgOut == '' || svgOut == undefined) {
+      handleClick();
+    }
+  }, [handleClick, imageUrl, svgOut]);
   return (
     <div className='w-full flex-shrink-0 flex-col mx-5 lg: basis-[30%] h-120 flex items-center justify-center'>
       <Image
@@ -67,7 +71,7 @@ export default function ImagePreview({
         <div
           id='svgcontainer'
           className='w-[200px] h-[200px] mt-5'
-          dangerouslySetInnerHTML={{ __html: svg }}
+          dangerouslySetInnerHTML={{ __html: svgOut ?? svg }}
         ></div>
       )}
       <div className='flex flex-row gap-2 mt-2'>

@@ -2,16 +2,11 @@ import { useState } from 'react';
 
 import { Button } from '../ui/button';
 
-const presets = {
-  random: [],
-  grayscale: [],
-};
-
 export default function PaletteSelector() {
   const [colors, setColors] = useState<string[]>([]);
   const [newColor, setNewColor] = useState('');
 
-  const handleColorChange = (event: any) => {
+  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setNewColor(event.target.value);
   };

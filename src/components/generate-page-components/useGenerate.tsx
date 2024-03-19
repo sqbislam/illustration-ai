@@ -91,7 +91,7 @@ export const useGenerate = ({
     null,
   );
 
-  const { setFormData, formData } = useAppStore((state) => ({
+  const { setFormData } = useAppStore((state) => ({
     formData: state.formData,
     setFormData: state.setFormData,
   }));
@@ -113,7 +113,7 @@ export const useGenerate = ({
       });
 
       // Save data to global store when new image url generated
-      setFormData(response as any);
+      setFormData(response as IllustratorGenerateResponse);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);

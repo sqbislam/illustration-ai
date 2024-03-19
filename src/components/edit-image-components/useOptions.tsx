@@ -155,7 +155,7 @@ export const useOptions = ({ sourceImage }: UseOptionsProps) => {
   const selectPreset = (_preset: string) => {
     if (Object.prototype.hasOwnProperty.call(optionpresets, _preset)) {
       const newOptions = optionpresets[_preset as keyof typeof optionpresets];
-      setOptions((options) => ({ ...options, ...(newOptions as any) }));
+      setOptions((options) => ({ ...options, ...(newOptions as object) }));
     }
   };
 
