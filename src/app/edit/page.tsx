@@ -6,7 +6,7 @@ interface EditImageProps extends React.PropsWithChildren {
   id?: string;
 }
 
-const EditImagePage: React.FC<EditImageProps> = (props) => {
+const EditImagePage: React.FC<EditImageProps> = () => {
   return (
     <section className='w-full'>
       <ImageEditor />

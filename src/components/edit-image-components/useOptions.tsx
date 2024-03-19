@@ -1,11 +1,9 @@
 'use client';
-import { parse } from 'path';
 import { useEffect, useState } from 'react';
-import { set } from 'react-hook-form';
 export const optionpresets = {
   default: {
     // Tracing
-    corsenabled: false,
+    corsenabled: true,
     ltres: 1,
     qtres: 1,
     pathomit: 8,
@@ -35,15 +33,21 @@ export const optionpresets = {
     blurdelta: 20,
   },
 
-  posterized1: { colorsampling: 0, numberofcolors: 2 },
+  posterized1: { corsenabled: true, colorsampling: 0, numberofcolors: 2 },
 
-  posterized2: { numberofcolors: 4, blurradius: 5 },
+  posterized2: { corsenabled: true, numberofcolors: 4, blurradius: 5 },
 
-  curvy: { ltres: 0.01, linefilter: true, rightangleenhance: false },
+  curvy: {
+    corsenabled: true,
+    ltres: 0.01,
+    linefilter: true,
+    rightangleenhance: false,
+  },
 
-  sharp: { qtres: 0.01, linefilter: false },
+  sharp: { corsenabled: true, qtres: 0.01, linefilter: false },
 
   detailed: {
+    corsenabled: true,
     pathomit: 0,
     roundcoords: 2,
     ltres: 0.5,
@@ -51,17 +55,28 @@ export const optionpresets = {
     numberofcolors: 64,
   },
 
-  smoothed: { blurradius: 5, blurdelta: 64 },
+  smoothed: { corsenabled: true, blurradius: 5, blurdelta: 64 },
 
-  grayscale: { colorsampling: 0, colorquantcycles: 1, numberofcolors: 7 },
+  grayscale: {
+    corsenabled: true,
+    colorsampling: 0,
+    colorquantcycles: 1,
+    numberofcolors: 7,
+  },
 
-  fixedpalette: { colorsampling: 0, colorquantcycles: 1, numberofcolors: 27 },
+  fixedpalette: {
+    corsenabled: true,
+    colorsampling: 0,
+    colorquantcycles: 1,
+    numberofcolors: 27,
+  },
 
-  randomsampling1: { colorsampling: 1, numberofcolors: 8 },
+  randomsampling1: { corsenabled: true, colorsampling: 1, numberofcolors: 8 },
 
-  randomsampling2: { colorsampling: 1, numberofcolors: 64 },
+  randomsampling2: { corsenabled: true, colorsampling: 1, numberofcolors: 64 },
 
   artistic1: {
+    corsenabled: true,
     colorsampling: 0,
     colorquantcycles: 1,
     pathomit: 0,
@@ -74,6 +89,7 @@ export const optionpresets = {
   },
 
   artistic2: {
+    corsenabled: true,
     qtres: 0.01,
     colorsampling: 0,
     colorquantcycles: 1,
@@ -81,9 +97,10 @@ export const optionpresets = {
     strokewidth: 0,
   },
 
-  artistic3: { qtres: 10, ltres: 10, numberofcolors: 8 },
+  artistic3: { corsenabled: true, qtres: 10, ltres: 10, numberofcolors: 8 },
 
   artistic4: {
+    corsenabled: true,
     qtres: 10,
     ltres: 10,
     numberofcolors: 64,
@@ -93,6 +110,7 @@ export const optionpresets = {
   },
 
   posterized3: {
+    corsenabled: true,
     ltres: 1,
     qtres: 1,
     pathomit: 20,
@@ -124,12 +142,14 @@ export const useOptions = ({ sourceImage }: UseOptionsProps) => {
   useEffect(() => {
     // Update the scale factor based on the source image size
     const img = new Image();
+    // Magic to prevent CORS issues
+    img.crossOrigin = 'Anonymous';
     img.onload = function () {
       const scaleFactor = 200 / img.width;
       setScaleFactor(scaleFactor);
       setOptions((prev) => ({ ...prev, scale: scaleFactor }));
     };
-    img.src = sourceImage;
+    img.src = sourceImage + '?' + new Date().getTime();
   }, [sourceImage]);
 
   const selectPreset = (_preset: string) => {

@@ -1,7 +1,8 @@
 import { CircleGauge, Paintbrush, Palette } from 'lucide-react';
 import React, { useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+import { BlockPicker } from 'react-color';
 
+import { IUseGenerateProps } from './useGenerate';
 import { promptSuggestions } from '../Illustrator';
 import { PromptSuggestion } from '../PromptSuggestion';
 import {
@@ -23,40 +24,30 @@ import { Input } from '../ui/input';
 import { Slider } from '../ui/slider';
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 
-type FormValues = {
-  artType: string;
-  colors: string[];
-  complexity?: number;
-  height: number;
-  width: number;
-  prompt: string;
-};
-
-const defaultValues: FormValues = {
-  artType: 'vibrant',
-  colors: [],
-  complexity: 0.2,
-  height: 100,
-  width: 100,
-  prompt: '',
-};
-
-export default function FormWrapper() {
-  const form = useForm<FormValues>({ defaultValues });
+export default function GenerateForm({
+  generateProps,
+}: {
+  generateProps: IUseGenerateProps;
+}) {
+  const { handleSubmitButton, form, isLoading } = generateProps;
+  const [activeStep, setActiveStep] = React.useState('item-1');
   const {
     register,
     formState: { errors },
     setValue,
     getValues,
+    handleSubmit,
   } = form;
-  const [activeStep, setActiveStep] = React.useState('item-1');
 
   const handleClick = (val: string) => {
     setActiveStep(val);
   };
-  const handleSuggestionClick = useCallback((suggestion: string) => {
-    setValue('prompt', suggestion);
-  }, []);
+  const handleSuggestionClick = useCallback(
+    (suggestion: string) => {
+      setValue('prompt', suggestion);
+    },
+    [setValue],
+  );
 
   return (
     <Accordion
@@ -64,11 +55,12 @@ export default function FormWrapper() {
       collapsible
       className='w-full flex-shrink-0'
       value={activeStep}
+      disabled={isLoading}
     >
       <AccordionItem onClick={() => handleClick('item-1')} value='item-1'>
         <AccordionTrigger>Choose art style</AccordionTrigger>
         <AccordionContent>
-          <form className='w-full h-[200px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
+          <form className='w-full h-[300px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
             <ToggleGroup
               type='single'
               {...register('artType')}
@@ -80,18 +72,18 @@ export default function FormWrapper() {
             >
               <ToggleGroupItem value='vibrant' aria-label='Toggle vibrant'>
                 <Palette className='h-4 w-4' />
-                <h2 className='ml-2'>Vibrant</h2>
+                <p className='ml-2 text-lg'>Vibrant</p>
               </ToggleGroupItem>
               <ToggleGroupItem value='artistic' aria-label='Toggle artistic'>
                 <Paintbrush className='h-4 w-4' />
-                <h2 className='ml-2'>Artistic</h2>
+                <p className='ml-2 text-lg'>Artistic</p>
               </ToggleGroupItem>
               <ToggleGroupItem
                 value='monochrome'
                 aria-label='Toggle monochrome'
               >
                 <CircleGauge className='h-4 w-4' />
-                <h2 className='ml-2'>Monochrome</h2>
+                <p className='ml-2 text-lg'>Monochrome</p>
               </ToggleGroupItem>
             </ToggleGroup>
 
@@ -102,7 +94,7 @@ export default function FormWrapper() {
               </div>
 
               <Slider
-                defaultValue={[getValues('complexity') as any]}
+                defaultValue={[getValues('complexity')]}
                 max={1}
                 step={0.2}
                 min={0}
@@ -113,7 +105,14 @@ export default function FormWrapper() {
             </div>
 
             <div className='flex flex-row items-end justify-end'>
-              <Button type='submit'>Next</Button>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleClick('item-2');
+                }}
+              >
+                Next
+              </Button>
             </div>
           </form>
         </AccordionContent>
@@ -121,9 +120,21 @@ export default function FormWrapper() {
       <AccordionItem onClick={() => handleClick('item-2')} value='item-2'>
         <AccordionTrigger>Choose Palette</AccordionTrigger>
         <AccordionContent>
-          <form className='w-full h-[200px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
+          <div className='w-full h-[300px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
             <h3>Color picker goes here</h3>
-          </form>
+
+            <BlockPicker />
+          </div>
+          <div className='flex flex-row items-end justify-end'>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                handleClick('item-3');
+              }}
+            >
+              Next
+            </Button>
+          </div>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem onClick={() => handleClick('item-3')} value='item-3'>
@@ -139,9 +150,12 @@ export default function FormWrapper() {
                       <FormLabel>Height</FormLabel>
                       <FormControl>
                         <Input
-                          {...register('height')}
+                          {...register('height', {
+                            setValueAs: (value) => parseInt(value, 10),
+                          })}
                           {...field}
-                          placeholder='e.g 100px'
+                          type='number'
+                          placeholder='e.g 100'
                         />
                       </FormControl>
 
@@ -157,8 +171,11 @@ export default function FormWrapper() {
                       <FormControl>
                         <Input
                           {...field}
-                          {...register('width')}
-                          placeholder='e.g 100px'
+                          {...register('width', {
+                            setValueAs: (value) => parseInt(value, 10),
+                          })}
+                          type='number'
+                          placeholder='e.g 100'
                         />
                       </FormControl>
 
@@ -193,7 +210,11 @@ export default function FormWrapper() {
                 />
               ))}
               <div className='flex flex-row items-end justify-end '>
-                <Button type='submit' onClick={(e) => e.preventDefault()}>
+                <Button
+                  type='submit'
+                  disabled={isLoading}
+                  onClick={handleSubmit((d) => handleSubmitButton(d))}
+                >
                   Submit
                 </Button>
               </div>

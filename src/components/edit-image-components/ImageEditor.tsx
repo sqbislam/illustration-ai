@@ -4,6 +4,7 @@ import * as ImageTracer from 'imagetracerjs';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
+import PaletteSelector from './PaletteSelector';
 import { optionpresets, useOptions } from './useOptions';
 import { PromptSuggestion } from '../PromptSuggestion';
 import { FieldGroup } from '../ui/field-group';
@@ -12,16 +13,6 @@ import { Skeleton } from '../ui/skeleton';
 import { Slider } from '../ui/slider';
 
 export default function ImageEditor() {
-  // const EditorOptions = {
-  //   NumberOfColors:3,
-  //   Filter Speckle (Cleaner)
-  //   Segment Length (More coarse)
-  //   Splice Threshold (More accurate)
-  //   Corner Threshold (Smoother)
-  //   Gradient Step (Less layers)
-  //   Curve Fitting (Pixel| Polygon | Spline)
-  //   Clustering
-  // }
   const exampleimage = '/assets/ex (3).png';
   const { updateOptions, selectPreset, options, getScaleFactor } = useOptions({
     sourceImage: exampleimage,
@@ -30,7 +21,7 @@ export default function ImageEditor() {
   const [isLoading, setIsLoading] = useState(false);
 
   const updatePreview = useCallback(
-    async (options?: any) => {
+    async (options?: object) => {
       setIsLoading(true);
       const scaleFactor = getScaleFactor();
 
@@ -128,8 +119,10 @@ export default function ImageEditor() {
             ))}
           </div>
         </FieldGroup>
+        <PaletteSelector />
       </div>
-      <div className='w-full bg-red-200 flex flex-col items-center justify-center gap-5'>
+      <div className='border-l border-gray-200' role='separator'></div>
+      <div className='w-full flex flex-col items-center gap-5'>
         {/* Images */}
         <div>
           Source Image
@@ -137,6 +130,7 @@ export default function ImageEditor() {
             id='sourceImage'
             src={exampleimage}
             alt='preview image'
+            priority
             height={200}
             width={200}
           />
