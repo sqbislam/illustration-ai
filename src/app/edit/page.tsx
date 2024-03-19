@@ -2,12 +2,7 @@ import React from 'react';
 
 import ImageEditor from '@/components/edit-image-components/ImageEditor';
 
-interface EditImageProps extends React.PropsWithChildren {
-  id?: string;
-  imageId?: string;
-}
-
-const EditImagePage: React.FC<EditImageProps> = () => {
+const EditImagePage: React.FC = () => {
   return (
     <section className='w-full'>
       <ImageEditor />
