@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 
-import { optionpresets, useOptions } from '../edit-image-components/useOptions';
+import { useOptions } from '../edit-image-components/useOptions';
 import { Button } from '../ui/button';
 import { Skeleton } from '../ui/skeleton';
 
@@ -12,10 +12,12 @@ export default function ImagePreview({
   isLoading,
   imageUrl,
   svgOut,
+  showEdit = true,
 }: {
   isLoading: boolean;
   imageUrl: string | null;
   svgOut?: string | null;
+  showEdit: boolean;
 }) {
   const { options, getScaleFactor } = useOptions({
     sourceImage: imageUrl ?? '',
@@ -31,10 +33,7 @@ export default function ImagePreview({
         async (svg: string) => {
           setSvg(svg);
         },
-        { ...options, scale: scaleFactor } ?? {
-          ...optionpresets.default,
-          scale: scaleFactor,
-        },
+        { ...options, scale: scaleFactor },
       );
     }
   }, [getScaleFactor, imageUrl, options]);
@@ -75,16 +74,18 @@ export default function ImagePreview({
         ></div>
       )}
       <div className='flex flex-row gap-2 mt-2'>
-        <Button
-          variant='link'
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <Link href='/edit'>
-            <Edit />
-          </Link>
-        </Button>
+        {showEdit && (
+          <Button
+            variant='link'
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <Link href='/edit'>
+              <Edit />
+            </Link>
+          </Button>
+        )}
 
         <Button
           variant='link'

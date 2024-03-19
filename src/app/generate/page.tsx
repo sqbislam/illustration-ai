@@ -23,6 +23,7 @@ const GeneratePage: React.FC<GeneratePageProps> = () => {
       <GenerateForm generateProps={generateProps} />
       <ImagePreview
         isLoading={isLoading}
+        showEdit={true}
         imageUrl={(response && response?.image_url) ?? image_url}
       />
     </section>

@@ -1,16 +1,17 @@
+import { RGBColor } from 'react-color';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { createStore } from 'zustand/vanilla';
 
 import { IllustratorGenerateResponse } from '@/lib/service';
 export type AppState = {
   currentStep: number; // Current step in the app
-  preferences?: { [key: string]: string }; // User preferences
+  preferences?: { colors: RGBColor[] }; // User preferences
   formData?: IllustratorGenerateResponse | null;
 };
 
 export type AppActions = {
   setCurrentStep: (step: number) => void;
-  setPreferences: (preferences: { [key: string]: string }) => void;
+  setPreferences: (preferences: { colors: RGBColor[] }) => void;
   setFormData: (formData: IllustratorGenerateResponse | null) => void;
 };
 
@@ -33,7 +34,7 @@ export const createAppStore = (initState: AppState = defaultInitState) => {
       (set) => ({
         ...initState,
         setCurrentStep: (step: number) => set({ currentStep: step }),
-        setPreferences: (preferences: { [key: string]: string }) =>
+        setPreferences: (preferences: { colors: RGBColor[] }) =>
           set({ preferences }),
         setFormData: (formData: IllustratorGenerateResponse | null) =>
           set({ formData }),

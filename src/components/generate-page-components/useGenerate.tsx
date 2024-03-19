@@ -15,13 +15,13 @@ const generateFormSchema = z.object({
   prompt: z.string().min(3).max(160),
   num_inference_steps: z.number().int().min(1).max(10),
   guidance_scale: z.number().min(0).max(0.9),
-  negative_prompt: z.string().min(3).max(160),
+  negative_prompt: z.string().min(3).max(450),
   scheduler: z.string().min(3).max(160),
   num_outputs: z.number().int().min(1).max(5),
   complexity: z.number().min(0.1).max(1),
   artType: z.string().min(3).max(160),
-  height: z.number().int().min(1).max(1000),
-  width: z.number().int().min(1).max(1000),
+  height: z.number().int().min(1).max(512),
+  width: z.number().int().min(1).max(512),
 });
 
 export interface IUseGenerateProps {
@@ -53,7 +53,7 @@ const defaultValues = {
   num_inference_steps: 4,
   guidance_scale: 0.5,
   negative_prompt:
-    'worst quality, realistic, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, blurry',
+    'worst quality, realistic, lowres, bad anatomy, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, blurry, grid, multiple sections, multiple images, border',
   scheduler: 'K_EULER',
   num_outputs: 1,
   artType: 'vibrant',
@@ -65,7 +65,7 @@ const defaultValues = {
 
 const generateprompt = ({ artType }: { artType: string }) => {
   let currPrompt =
-    '(Flat UI)(Flat Colors)(Minimal)(Sharp) Vector graphic Illustration, Svg, Sharp, cartoon';
+    '(Flat UI)(Flat Colors)(Minimal)(Sharp) Vector graphic Illustration, Svg, Sharp, cartoon, single image, no border';
   if (artType === 'vibrant') {
     currPrompt += ` a vibrant and colorful illustration`;
   } else if (artType === 'artistic') {
@@ -90,12 +90,6 @@ export const useGenerate = ({
   const [response, setResponse] = useState<IllustratorGenerateResponse | null>(
     null,
   );
-
-  const { setFormData } = useAppStore((state) => ({
-    formData: state.formData,
-    setFormData: state.setFormData,
-  }));
-
   const form = useForm<GenerateFormValues>({
     resolver: zodResolver(generateFormSchema),
     mode: 'onChange',
@@ -103,6 +97,12 @@ export const useGenerate = ({
     // Set default values so that the form inputs are controlled components.
     defaultValues,
   });
+
+  // Global App Store
+  const { setFormData } = useAppStore((state) => ({
+    formData: state.formData,
+    setFormData: state.setFormData,
+  }));
 
   useEffect(() => {
     if (response && response.image_url) {

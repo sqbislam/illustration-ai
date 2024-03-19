@@ -3,10 +3,12 @@
 import * as ImageTracer from 'imagetracerjs';
 import { useCallback, useEffect, useState } from 'react';
 
+import { optionpresets } from '@/lib/constants';
+
 import { useAppStore } from '@/providers/app-provider';
 
 import PaletteSelector from './PaletteSelector';
-import { optionpresets, useOptions } from './useOptions';
+import { useOptions } from './useOptions';
 import ImagePreview from '../generate-page-components/ImagePreview';
 import { PromptSuggestion } from '../PromptSuggestion';
 import { FieldGroup } from '../ui/field-group';
@@ -54,7 +56,7 @@ export default function ImageEditor() {
           <Slider
             id='numberofcolors'
             name='numberofcolors'
-            defaultValue={[options.numberofcolors]}
+            defaultValue={[options.numberofcolors ?? 0]}
             max={24}
             step={2}
             min={2}
@@ -69,7 +71,7 @@ export default function ImageEditor() {
           <Slider
             id='colorsampling'
             name='colorsampling'
-            defaultValue={[options.colorsampling]}
+            defaultValue={[options.colorsampling ?? 0]}
             max={6}
             step={1}
             min={0}
@@ -84,7 +86,7 @@ export default function ImageEditor() {
           <Slider
             id='strokewidth'
             name='strokewidth'
-            defaultValue={[options.strokewidth]}
+            defaultValue={[options.strokewidth ?? 0]}
             max={5}
             step={1}
             min={0}
@@ -99,7 +101,7 @@ export default function ImageEditor() {
           <Slider
             id='blurradius'
             name='blurradius'
-            defaultValue={[options.blurradius]}
+            defaultValue={[options.blurradius ?? 0]}
             max={10}
             step={1}
             min={0}
@@ -124,6 +126,7 @@ export default function ImageEditor() {
       </div>
       <div className='border-l border-gray-200' role='separator'></div>
       <ImagePreview
+        showEdit={false}
         imageUrl={imageUrl ?? ''}
         isLoading={isLoading}
         svgOut={svg}

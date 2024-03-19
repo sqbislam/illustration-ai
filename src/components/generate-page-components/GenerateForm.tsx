@@ -1,6 +1,5 @@
 import { CircleGauge, Paintbrush, Palette } from 'lucide-react';
 import React, { useCallback } from 'react';
-import { BlockPicker } from 'react-color';
 
 import { IUseGenerateProps } from './useGenerate';
 import { promptSuggestions } from '../Illustrator';
@@ -31,7 +30,13 @@ export default function GenerateForm({
 }) {
   const { handleSubmitButton, form, isLoading } = generateProps;
   const [activeStep, setActiveStep] = React.useState('item-1');
-  const { register, setValue, getValues, handleSubmit } = form;
+  const {
+    register,
+    setValue,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
   const handleClick = (val: string) => {
     setActiveStep(val);
@@ -42,7 +47,6 @@ export default function GenerateForm({
     },
     [setValue],
   );
-
   return (
     <Accordion
       type='single'
@@ -54,7 +58,7 @@ export default function GenerateForm({
       <AccordionItem onClick={() => handleClick('item-1')} value='item-1'>
         <AccordionTrigger>Choose art style</AccordionTrigger>
         <AccordionContent>
-          <form className='w-full h-[300px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
+          <div className='w-full h-[300px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
             <ToggleGroup
               type='single'
               {...register('artType')}
@@ -79,6 +83,11 @@ export default function GenerateForm({
                 <CircleGauge className='h-4 w-4' />
                 <p className='ml-2 text-lg'>Monochrome</p>
               </ToggleGroupItem>
+              {errors.artType && (
+                <p className='text-md text-red-500'>
+                  Please select an art type
+                </p>
+              )}
             </ToggleGroup>
 
             <div className='flex flex-col items-center justify-center gap-5 my-5'>
@@ -96,46 +105,28 @@ export default function GenerateForm({
                   setValue('complexity', val[0], { shouldValidate: true });
                 }}
               />
+              {errors.complexity && (
+                <p className='text-md text-red-500'>
+                  {errors.complexity.message}
+                </p>
+              )}
             </div>
-
-            <div className='flex flex-row items-end justify-end'>
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleClick('item-2');
-                }}
-              >
-                Next
-              </Button>
-            </div>
-          </form>
+          </div>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem onClick={() => handleClick('item-2')} value='item-2'>
+      {/* <AccordionItem onClick={() => handleClick('item-2')} value='item-2'>
         <AccordionTrigger>Choose Palette</AccordionTrigger>
         <AccordionContent>
-          <div className='w-full h-[300px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
-            <h3>Color picker goes here</h3>
-
-            <BlockPicker />
-          </div>
-          <div className='flex flex-row items-end justify-end'>
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                handleClick('item-3');
-              }}
-            >
-              Next
-            </Button>
+          <div className='w-full h-[400px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
+            <PaletteSelector />
           </div>
         </AccordionContent>
-      </AccordionItem>
+      </AccordionItem> */}
       <AccordionItem onClick={() => handleClick('item-3')} value='item-3'>
-        <AccordionTrigger>How should it look?</AccordionTrigger>
+        <AccordionTrigger>Generate Image and SVG!</AccordionTrigger>
         <AccordionContent>
           <Form {...form}>
-            <form className='w-full min-h-[200px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
+            <div className='w-full min-h-[200px] flex flex-col p-4 gap-2 rounded-sm justify-between'>
               <div className='flex w-full flex-row justify-between '>
                 <FormField
                   name='height'
@@ -144,15 +135,15 @@ export default function GenerateForm({
                       <FormLabel>Height</FormLabel>
                       <FormControl>
                         <Input
-                          {...register('height', {
-                            setValueAs: (value) => parseInt(value, 10),
-                          })}
                           {...field}
+                          {...register('height', {
+                            valueAsNumber: true,
+                            validate: (value) => value > 0 && value <= 512,
+                          })}
                           type='number'
                           placeholder='e.g 100'
                         />
                       </FormControl>
-
                       <FormMessage />
                     </FormItem>
                   )}
@@ -166,7 +157,8 @@ export default function GenerateForm({
                         <Input
                           {...field}
                           {...register('width', {
-                            setValueAs: (value) => parseInt(value, 10),
+                            valueAsNumber: true,
+                            validate: (value) => value > 0 && value <= 512,
                           })}
                           type='number'
                           placeholder='e.g 100'
@@ -212,7 +204,7 @@ export default function GenerateForm({
                   Submit
                 </Button>
               </div>
-            </form>
+            </div>
           </Form>
         </AccordionContent>
       </AccordionItem>
