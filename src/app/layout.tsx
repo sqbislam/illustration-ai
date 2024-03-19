@@ -64,7 +64,7 @@ export default function RootLayout({
               <div className='max-w-xl p-4 rounded-lg w-full'>
                 <h1 className='text-3xl font-bold mb-4'>Illustration AI</h1>
                 <p className='text-grawy-600 mb-6'>
-                  Welcome to our AI application. An open source free platform to
+                  Welcome to Illustrator AI. An open source free platform to
                   generate beautiful illustrations. Generate visually striking
                   illustrations from your text. Create beautiful illustrations
                   with just a few clicks and download them!
