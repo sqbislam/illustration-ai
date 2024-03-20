@@ -28,6 +28,7 @@
     "@types/react-color": "^3.0.12",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "debounce": "^2.0.0",
     "framer-motion": "^11.0.12",
     "imagetracerjs": "^1.2.6",
     "lucide-react": "^0.356.0",

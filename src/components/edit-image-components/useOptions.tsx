@@ -5,6 +5,7 @@ import { OptionPresets, optionpresets } from '@/lib/constants';
 
 import { useAppStore } from '@/providers/app-provider';
 
+const DEFAULT_SVG_DIM = 400;
 interface UseOptionsProps {
   sourceImage: string;
 }
@@ -19,7 +20,7 @@ export const useOptions = ({ sourceImage }: UseOptionsProps) => {
     // Magic to prevent CORS issues
     img.crossOrigin = 'Anonymous';
     img.onload = function () {
-      const scaleFactor = 200 / img.width;
+      const scaleFactor = DEFAULT_SVG_DIM / img.width;
       setScaleFactor(scaleFactor);
 
       setOptions((prev) => ({

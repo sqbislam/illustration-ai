@@ -56,20 +56,24 @@ export default function ImagePreview({
     }
   }, [handleClick, imageUrl, svgOut]);
   return (
-    <div className='w-full flex-shrink-0 flex-col mx-5 lg: basis-[30%] h-120 flex items-center justify-center'>
-      <Image
-        id='sourceImage'
-        src={imageUrl || 'http://picsum.photos/200'}
-        alt='preview image'
-        height={200}
-        width={200}
-      />
+    <div className='w-full basis-[50%] flex-grow flex-shrink-0 flex-col lg: basis-[30%] flex items-center justify-center'>
       {isLoading ? (
-        <Skeleton className='w-[200px] h-[200px] mt-5' />
+        <Skeleton className='w-[400px] h-[400px] mt-5' />
+      ) : (
+        <Image
+          id='sourceImage'
+          src={imageUrl || 'http://picsum.photos/200'}
+          alt='preview image'
+          height={400}
+          width={400}
+        />
+      )}
+      {isLoading ? (
+        <Skeleton className='w-[400px] h-[400px] mt-5' />
       ) : (
         <div
           id='svgcontainer'
-          className='w-[200px] h-[200px] mt-5'
+          className='w-[400px] h-[400px] mt-5'
           dangerouslySetInnerHTML={{ __html: svgOut ?? svg }}
         ></div>
       )}

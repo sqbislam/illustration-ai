@@ -59,8 +59,8 @@ const defaultValues = {
   artType: 'vibrant',
   colors: [],
   complexity: 0.2,
-  height: 100,
-  width: 100,
+  height: 400,
+  width: 400,
 };
 
 const generateprompt = ({ artType }: { artType: string }) => {
@@ -92,7 +92,7 @@ export const useGenerate = ({
   );
   const form = useForm<GenerateFormValues>({
     resolver: zodResolver(generateFormSchema),
-    mode: 'onChange',
+    mode: 'onSubmit',
 
     // Set default values so that the form inputs are controlled components.
     defaultValues,

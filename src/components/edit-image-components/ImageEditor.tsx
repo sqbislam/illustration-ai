@@ -48,7 +48,7 @@ export default function ImageEditor() {
   }, [options, updatePreview]);
 
   return (
-    <div className='w-full flex flex-row '>
+    <div className='w-full flex flex-col lg:flex-row'>
       {/* Options */}
       <div className='w-full pr-5'>
         <FieldGroup>
@@ -56,11 +56,11 @@ export default function ImageEditor() {
           <Slider
             id='numberofcolors'
             name='numberofcolors'
-            defaultValue={[options.numberofcolors ?? 0]}
+            value={[options.numberofcolors ?? 0]}
             max={24}
             step={2}
             min={2}
-            onValueCommit={(val) => {
+            onValueChange={(val: number[]) => {
               updateOptions('numberofcolors', val[0]);
             }}
           />
@@ -71,11 +71,11 @@ export default function ImageEditor() {
           <Slider
             id='colorsampling'
             name='colorsampling'
-            defaultValue={[options.colorsampling ?? 0]}
+            value={[options.colorsampling ?? 0]}
             max={6}
             step={1}
             min={0}
-            onValueCommit={(val) => {
+            onValueChange={(val: number[]) => {
               updateOptions('colorsampling', val[0]);
             }}
           />
@@ -86,11 +86,11 @@ export default function ImageEditor() {
           <Slider
             id='strokewidth'
             name='strokewidth'
-            defaultValue={[options.strokewidth ?? 0]}
+            value={[options.strokewidth ?? 0]}
             max={5}
             step={1}
             min={0}
-            onValueCommit={(val) => {
+            onValueChange={(val: number[]) => {
               updateOptions('strokewidth', val[0]);
             }}
           />
@@ -101,11 +101,11 @@ export default function ImageEditor() {
           <Slider
             id='blurradius'
             name='blurradius'
-            defaultValue={[options.blurradius ?? 0]}
+            value={[options.blurradius ?? 0]}
             max={10}
             step={1}
             min={0}
-            onValueCommit={(val) => {
+            onValueChange={(val: number[]) => {
               updateOptions('blurradius', val[0]);
             }}
           />

@@ -19,7 +19,7 @@ const GeneratePage: React.FC<GeneratePageProps> = () => {
   }));
 
   return (
-    <section className='w-full flex items-center justify-center sm:flex-row lg: flex-col'>
+    <section className='w-full flex justify-center sm:flex-row lg: flex-col'>
       <GenerateForm generateProps={generateProps} />
       <ImagePreview
         isLoading={isLoading}

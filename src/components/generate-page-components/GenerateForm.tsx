@@ -51,7 +51,7 @@ export default function GenerateForm({
     <Accordion
       type='single'
       collapsible
-      className='w-full flex-shrink-0'
+      className='w-full flex-shrink-0 max-w-md'
       value={activeStep}
       disabled={isLoading}
     >
@@ -63,25 +63,25 @@ export default function GenerateForm({
               type='single'
               {...register('artType')}
               value={getValues('artType')}
-              onValueChange={(val) => {
+              onValueChange={(val: string) => {
                 setValue('artType', val, { shouldValidate: true });
               }}
               size='lg'
             >
               <ToggleGroupItem value='vibrant' aria-label='Toggle vibrant'>
                 <Palette className='h-4 w-4' />
-                <p className='ml-2 text-lg'>Vibrant</p>
+                <p className='ml-2 text-sm lg: text-lg'>Vibrant</p>
               </ToggleGroupItem>
               <ToggleGroupItem value='artistic' aria-label='Toggle artistic'>
                 <Paintbrush className='h-4 w-4' />
-                <p className='ml-2 text-lg'>Artistic</p>
+                <p className='ml-2 text-sm lg: text-lg'>Artistic</p>
               </ToggleGroupItem>
               <ToggleGroupItem
                 value='monochrome'
                 aria-label='Toggle monochrome'
               >
                 <CircleGauge className='h-4 w-4' />
-                <p className='ml-2 text-lg'>Monochrome</p>
+                <p className='ml-2 text-sm lg: text-lg'>Monochrome</p>
               </ToggleGroupItem>
               {errors.artType && (
                 <p className='text-md text-red-500'>
@@ -97,12 +97,12 @@ export default function GenerateForm({
               </div>
 
               <Slider
-                defaultValue={[getValues('complexity')]}
                 max={1}
                 step={0.2}
                 min={0}
-                onValueCommit={(val) => {
-                  setValue('complexity', val[0], { shouldValidate: true });
+                defaultValue={[getValues('complexity')]}
+                onValueCommit={(val: number[]) => {
+                  setValue('complexity', val[0]);
                 }}
               />
               {errors.complexity && (
@@ -178,7 +178,9 @@ export default function GenerateForm({
                     <FormControl>
                       <Input
                         {...field}
-                        {...register('prompt')}
+                        {...register('prompt', {
+                          required: 'Required',
+                        })}
                         placeholder='e.g A cat on a bed of candies'
                       />
                     </FormControl>

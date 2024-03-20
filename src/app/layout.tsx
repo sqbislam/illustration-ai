@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import './globals.css';
 
@@ -61,14 +62,19 @@ export default function RootLayout({
           <AppStoreProvider>
             <div className='flex flex-col justify-center items-center w-full relative'>
               <ThemeToggler />
-              <div className='max-w-xl p-4 rounded-lg w-full'>
-                <h1 className='text-3xl font-bold mb-4'>Illustration AI</h1>
-                <p className='text-grawy-600 mb-6'>
-                  Welcome to Illustrator AI. An open source free platform to
-                  generate beautiful illustrations. Generate visually striking
-                  illustrations from your text. Create beautiful illustrations
-                  with just a few clicks and download them!
-                </p>
+              <div className='max-w-4xl p-4 rounded-lg w-full'>
+                <div className='max-w-xl mx-auto'>
+                  <Link href='/'>
+                    <h1 className='text-3xl font-bold mb-4'>Illustration AI</h1>
+                  </Link>
+
+                  <p className='mb-6 text-gray-400 '>
+                    Welcome to Illustrator AI. An open source free platform to
+                    generate beautiful illustrations. Generate visually striking
+                    illustrations from your text. Create beautiful illustrations
+                    with just a few clicks and download them!
+                  </p>
+                </div>
 
                 <div className='flex justify-center w-full'>{children}</div>
               </div>
