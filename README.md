@@ -23,4 +23,7 @@ Work in progress. More features coming soon.
 
 Uses hugging face's stablediffusion model. Starter template from Vercel AI.
 
+## Some example SVGs created using Illustrator AI
+![example one](https://raw.githubusercontent.com/sqbislam/illustration-ai/a18562093e7bd3e04b819387436d7a3d7fe7958a/public/assets/illustration-ai(9).svg) ![example two](https://raw.githubusercontent.com/sqbislam/illustration-ai/a18562093e7bd3e04b819387436d7a3d7fe7958a/public/assets/illustration-ai.svg) ![example one](https://raw.githubusercontent.com/sqbislam/illustration-ai/a18562093e7bd3e04b819387436d7a3d7fe7958a/public/assets/illustration-ai(3).svg) ![example one](https://raw.githubusercontent.com/sqbislam/illustration-ai/a18562093e7bd3e04b819387436d7a3d7fe7958a/public/assets/illustration-ai(10).svg)
+
 Author: [Saqib Islam](https://linkedin.com/in/saqib-islam)
