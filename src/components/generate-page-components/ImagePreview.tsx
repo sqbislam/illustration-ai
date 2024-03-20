@@ -62,7 +62,7 @@ export default function ImagePreview({
       ) : (
         <Image
           id='sourceImage'
-          src={imageUrl || 'https://placehold.co/600x600/000000/FFF'}
+          src={imageUrl || 'https://placehold.co/400x400/000000/FFF/png'}
           alt='preview image'
           height={400}
           width={400}
