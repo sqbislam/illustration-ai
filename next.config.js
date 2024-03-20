@@ -13,6 +13,7 @@ const nextConfig = {
       'pbxt.replicate.delivery',
       'g4yqcv8qdhf169fk.public.blob.vercel-storage.com',
       'picsum.photos',
+      'placehold.co',
     ],
   },
   webpack(config) {

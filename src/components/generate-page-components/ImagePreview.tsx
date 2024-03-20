@@ -62,7 +62,7 @@ export default function ImagePreview({
       ) : (
         <Image
           id='sourceImage'
-          src={imageUrl || 'http://picsum.photos/200'}
+          src={imageUrl || 'https://placehold.co/600x600'}
           alt='preview image'
           height={400}
           width={400}
