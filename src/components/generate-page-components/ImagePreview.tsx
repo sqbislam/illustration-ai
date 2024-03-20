@@ -27,7 +27,7 @@ export default function ImagePreview({
 
   const handleClick = useCallback(async () => {
     if (imageUrl) {
-      const scaleFactor = getScaleFactor();
+      const scaleFactor = await getScaleFactor();
       await ImageTracer.imageToSVG(
         imageUrl,
         async (svg: string) => {

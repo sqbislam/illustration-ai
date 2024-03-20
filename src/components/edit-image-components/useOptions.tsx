@@ -65,7 +65,7 @@ export const useOptions = ({ sourceImage }: UseOptionsProps) => {
 
   const getScaleFactor = () => {
     if (scaleFactor === 0) {
-      return 1;
+      return 0;
     } else {
       return scaleFactor;
     }
